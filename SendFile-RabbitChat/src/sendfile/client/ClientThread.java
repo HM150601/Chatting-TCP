@@ -36,7 +36,7 @@ public class ClientThread implements Runnable{
         try {
             dis = new DataInputStream(socket.getInputStream());
         } catch (IOException e) {
-            main.appendMessage("[IOException]: "+ e.getMessage(), "Lỗi", Color.RED, Color.RED);
+            main.appendMessage("[IOException]: "+ e.getMessage(), "Error", Color.RED, Color.RED);
         }
     }
 
@@ -77,7 +77,7 @@ public class ClientThread implements Runnable{
                         String sender = st.nextToken();
                         String receiver = st.nextToken();
                         String fname = st.nextToken();
-                        int confirm = JOptionPane.showConfirmDialog(main, "Từ: "+sender+"\ntên file: "+fname+"\nbạn có Chấp nhận file này không.?");
+                        int confirm = JOptionPane.showConfirmDialog(main, "From: "+sender+"\nFile Name: "+fname+"\nDo you accept this file?");
                         //SoundEffect.FileSharing.play(); //   Play Audio
                         if(confirm == 0){ // client chấp nhận yêu cầu, sau đó thông báo đến sender để gửi file
                             /* chọn chỗ lưu file   */
@@ -85,7 +85,7 @@ public class ClientThread implements Runnable{
                             try {
                                 dos = new DataOutputStream(socket.getOutputStream());
                                 // Format:  CMD_SEND_FILE_ACCEPT [ToSender] [Message]
-                                String format = "CMD_SEND_FILE_ACCEPT "+sender+" Chấp nhận";
+                                String format = "CMD_SEND_FILE_ACCEPT "+sender+" Accept";
                                 dos.writeUTF(format);
                                 
                                 /*  hàm này sẽ tạo một socket filesharing  để tạo một luồng xử lý file đi vào và socket này sẽ tự động đóng khi hoàn thành.  */
@@ -101,7 +101,7 @@ public class ClientThread implements Runnable{
                             try {
                                 dos = new DataOutputStream(socket.getOutputStream());
                                 // Format:  CMD_SEND_FILE_ERROR [ToSender] [Message]
-                                String format = "CMD_SEND_FILE_ERROR "+sender+" Người dùng từ chối yêu cầu của bạn hoặc bị mất kết nối.!";
+                                String format = "CMD_SEND_FILE_ERROR "+sender+" The user refuses your request or loses the connection!";
                                 dos.writeUTF(format);
                             } catch (IOException e) {
                                 System.out.println("[CMD_FILE_XD]: "+e.getMessage());
@@ -110,12 +110,12 @@ public class ClientThread implements Runnable{
                         break;   
                         
                     default: 
-                        main.appendMessage("[CMDException]: Không rõ lệnh "+ CMD, "CMDException", Color.RED, Color.RED);
+                        main.appendMessage("[CMDException]: Command unknown "+ CMD, "CMDException", Color.RED, Color.RED);
                     break;
                 }
             }
         } catch(IOException e){
-            main.appendMessage(" Bị mất kết nối đến Máy chũ, vui lòng thử lại.!", "Lỗi", Color.RED, Color.RED);
+            main.appendMessage(" Lost connection to the old machine, please try again!", "Error", Color.RED, Color.RED);
         }
     }
 }

@@ -51,13 +51,13 @@ public class MainForm extends javax.swing.JFrame {
     public void setSocketList(Socket socket){
         try {
             socketList.add(socket);
-            appendMessage("[setSocketList]: Được thêm");
+            appendMessage("[setSocketList]: Added");
         } catch (Exception e) { appendMessage("[setSocketList]: "+ e.getMessage()); }
     }
     public void setClientList(String client){
         try {
             clientList.add(client);
-            appendMessage("[setClientList]: Được thêm");
+            appendMessage("[setClientList]: Added");
         } catch (Exception e) { appendMessage("[setClientList]: "+ e.getMessage()); }
     }
     public void setClientFileSharingUsername(String user){
@@ -117,10 +117,10 @@ public class MainForm extends javax.swing.JFrame {
                     }
                     clientFileSharingUsername.removeElementAt(x);
                     clientFileSharingSocket.removeElementAt(x);
-                    appendMessage("[FileSharing]: Hủy bỏ "+ username);
+                    appendMessage("[FileSharing]: Cancel "+ username);
                 } catch (IOException e) {
                     appendMessage("[FileSharing]: "+ e.getMessage());
-                    appendMessage("[FileSharing]: Không thể hủy bỏ "+ username);
+                    appendMessage("[FileSharing]: Cannot abort "+ username);
                 }
                 break;
             }
@@ -234,7 +234,7 @@ public class MainForm extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        int confirm = JOptionPane.showConfirmDialog(null, "Đóng Máy Chủ.?");
+        int confirm = JOptionPane.showConfirmDialog(null, "Close Server?");
         if(confirm == 0){
             serverThread.stop();
         }

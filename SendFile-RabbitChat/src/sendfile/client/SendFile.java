@@ -101,7 +101,7 @@ public class SendFile extends javax.swing.JFrame {
                                 msg = msg+" "+st.nextToken();
                             }
                             form.updateAttachment(false);
-                            JOptionPane.showMessageDialog(SendFile.this, msg, "Lỗi", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(SendFile.this, msg, "Error", JOptionPane.ERROR_MESSAGE);
                             this.closeMe();
                             break;
                             
@@ -117,10 +117,10 @@ public class SendFile extends javax.swing.JFrame {
                                 emsg = emsg +" "+ st.nextToken();
                             }                                                     
                             System.out.println(emsg);                            
-                            JOptionPane.showMessageDialog(SendFile.this, emsg,"Lỗi", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(SendFile.this, emsg,"Error", JOptionPane.ERROR_MESSAGE);
                             form.updateAttachment(false);
                             form.disableGUI(false);
-                            form.updateBtn("Gửi File");
+                            form.updateBtn("Send File");
                             break;
                         
                         
@@ -134,7 +134,7 @@ public class SendFile extends javax.swing.JFrame {
                                 rMsg = rMsg+" "+st.nextToken();
                             }
                             form.updateAttachment(false);
-                            JOptionPane.showMessageDialog(SendFile.this, rMsg, "Lỗi", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(SendFile.this, rMsg, "Error", JOptionPane.ERROR_MESSAGE);
                             dispose();
                             break;
                     }
@@ -269,13 +269,13 @@ public class SendFile extends javax.swing.JFrame {
                 String format = "CMD_SEND_FILE_XD "+myusername+" "+sendTo+" "+fname;
                 dos.writeUTF(format);
                 System.out.println(format);
-                updateBtn("Đang gửi đi...");
+                updateBtn("Sending...");
                 btnSendFile.setEnabled(false);
             } catch (IOException e) {
                 System.out.println(e.getMessage());
             }
         }else{
-            JOptionPane.showMessageDialog(this, "Không để trống.!","Lỗi", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Do not leave blank!","Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnSendFileActionPerformed
     public void showOpenDialog(){

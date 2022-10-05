@@ -167,10 +167,10 @@ public class LoginForm extends javax.swing.JFrame {
                     setVisible(false);
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "Tài khoản phải tối đa 15 ký tự bao gồm [khoảng trắng].!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Account must be up to 15 characters including [space].!", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Chưa hoàn thành Form.!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Form not completed!", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
     

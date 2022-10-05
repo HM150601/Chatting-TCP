@@ -21,11 +21,11 @@ public class ServerThread implements Runnable {
     boolean keepGoing = true;
     
     public ServerThread(int port, MainForm main){
-        main.appendMessage("[Server]: Máy Chủ hiện đang khởi động ở port "+ port);
+        main.appendMessage("[Server]: Server is now starting "+ port);
         try {
             this.main = main;
             server = new ServerSocket(port);
-            main.appendMessage("[Server]: Máy Chủ đã khởi động.!");
+            main.appendMessage("[Server]: Server has started!");
         } 
         catch (IOException e) { main.appendMessage("[IOException]: "+ e.getMessage()); }
     }
@@ -49,7 +49,7 @@ public class ServerThread implements Runnable {
         try {
             server.close();
             keepGoing = false;
-            System.out.println("Máy Chủ bị đóng..!");
+            System.out.println("Server is closed!");
             System.exit(0);
         } catch (IOException e) {
             System.out.println(e.getMessage());

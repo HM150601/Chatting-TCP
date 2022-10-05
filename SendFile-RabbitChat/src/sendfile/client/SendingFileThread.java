@@ -46,7 +46,7 @@ public class SendingFileThread implements Runnable {
     public void run() {
         try {
             form.disableGUI(true);
-            System.out.println("Gửi File..!");
+            System.out.println("Send File..!");
             dos = new DataOutputStream(socket.getOutputStream());
             /** Write filename, recipient, username  **/
             File filename = new File(file);
@@ -54,8 +54,8 @@ public class SendingFileThread implements Runnable {
             int filesize = (int)Math.ceil(len / BUFFER_SIZE); 
             String clean_filename = filename.getName();
             dos.writeUTF("CMD_SENDFILE "+ clean_filename.replace(" ", "_") +" "+ filesize +" "+ receiver +" "+ sender);
-            System.out.println("Từ: "+ sender);
-            System.out.println("Đến: "+ receiver);
+            System.out.println("From: "+ sender);
+            System.out.println("To: "+ receiver);
             /** Create an stream **/
             InputStream input = new FileInputStream(filename);
             OutputStream output = socket.getOutputStream();
@@ -71,14 +71,14 @@ public class SendingFileThread implements Runnable {
                 output.write(buffer, 0, count);
             }
             /* Cập nhật AttachmentForm GUI */
-            form.setMyTitle("File đã được gửi đi.!");
+            form.setMyTitle("File has been sent!");
             form.updateAttachment(false); //  Cập nhật Attachment 
-            JOptionPane.showMessageDialog(form, "File đã gửi thành công.!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(form, "File sent successfully!", "Successful", JOptionPane.INFORMATION_MESSAGE);
             form.closeThis();
             /* Đóng gửi file */
             output.flush();
             output.close();
-            System.out.println("File đã được gửi..!");
+            System.out.println("File has been sent..!");
         } catch (IOException e) {
             form.updateAttachment(false); //  Cập nhật Attachment
             System.out.println("[SendFile]: "+ e.getMessage());

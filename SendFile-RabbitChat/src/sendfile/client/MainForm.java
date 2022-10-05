@@ -50,7 +50,7 @@ public class MainForm extends javax.swing.JFrame {
         this.username = username;
         this.host = host;
         this.port = port;
-        setTitle("Bạn đang được đăng nhập với tên: " + username);
+        setTitle("You are currently logged in as: " + username);
         //Kết nối 
         connect();
     }
@@ -59,14 +59,14 @@ public class MainForm extends javax.swing.JFrame {
      }
     
     public void connect(){
-        appendMessage(" Đang kết nối...", "Trạng thái", Color.PINK, Color.PINK);
+        appendMessage(" Connecting...", "Status", Color.PINK, Color.PINK);
         try {
             socket = new Socket(host, port);
             dos = new DataOutputStream(socket.getOutputStream());
             // gửi username đang kết nối
             dos.writeUTF("CMD_JOIN "+ username);
-            appendMessage(" Đã kết nối", "Trạng thái", Color.PINK, Color.PINK);
-            appendMessage(" Gửi tin nhắn bây giờ!", "Trạng thái", Color.PINK, Color.PINK);
+            appendMessage(" Connected", "Status", Color.PINK, Color.PINK);
+            appendMessage(" Send a message now!", "Status", Color.PINK, Color.PINK);
             
             // Khởi động Client Thread 
             new Thread(new ClientThread(socket, this)).start();
@@ -77,8 +77,8 @@ public class MainForm extends javax.swing.JFrame {
         }
         catch(IOException e) {
             isConnected = false;
-            JOptionPane.showMessageDialog(this, "Không thể kết nối đến máy chủ, vui lòng thử lại sau.!","Kết nối thất bại",JOptionPane.ERROR_MESSAGE);
-            appendMessage("[IOException]: "+ e.getMessage(), "Lỗi", Color.RED, Color.RED);
+            JOptionPane.showMessageDialog(this, "Unable to connect to the server, please try again later!","Connection failed",JOptionPane.ERROR_MESSAGE);
+            appendMessage("[IOException]: "+ e.getMessage(), "Error", Color.RED, Color.RED);
         }
     }
     
@@ -254,7 +254,7 @@ public class MainForm extends javax.swing.JFrame {
     public void openFolder(){
         JFileChooser chooser = new JFileChooser();
         chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        int open = chooser.showDialog(this, "Mở Thư Mục");
+        int open = chooser.showDialog(this, "Open Folder");
         if(open == chooser.APPROVE_OPTION){
             mydownloadfolder = chooser.getSelectedFile().toString()+"\\";
         } else {
@@ -428,7 +428,7 @@ public class MainForm extends javax.swing.JFrame {
                 s.setVisible(true);
                 attachmentOpen = true;
             } else {
-                JOptionPane.showMessageDialog(this, "Không thể thiết lập Chia sẻ File tại thời điểm này, xin vui lòng thử lại sau.!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Failed to set up File Sharing at this time, please try again later!", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_sendFileMenuActionPerformed
@@ -452,7 +452,7 @@ public class MainForm extends javax.swing.JFrame {
 
     private void LogoutMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutMenuActionPerformed
         // TODO add your handling code here:
-        int confirm = JOptionPane.showConfirmDialog(null, "Bạn có chắc đăng xuất không ?");
+        int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you signed out?");
         if(confirm == 0){
             try {
                 socket.close();
@@ -473,7 +473,7 @@ public class MainForm extends javax.swing.JFrame {
             appendMyMessage(" "+evt.getActionCommand(), username);
             jTextField1.setText("");
         } catch (IOException e) {
-            appendMessage(" Không thể gửi tin nhắn đi bây giờ, không thể kết nối đến Máy Chủ tại thời điểm này, xin vui lòng thử lại sau hoặc khởi động lại ứng dụng này.!", "Lỗi", Color.RED, Color.RED);
+            appendMessage(" Cannot send message now, cannot connect to Server at this time, please try again later or restart this application.!", "Error", Color.RED, Color.RED);
         }
     }//GEN-LAST:event_jTextField1ActionPerformed
 
@@ -485,7 +485,7 @@ public class MainForm extends javax.swing.JFrame {
             appendMyMessage(" "+jTextField1.getText(), username);
             jTextField1.setText("");
         } catch (IOException e) {
-            appendMessage(" Không thể gửi tin nhắn đi bây giờ, không thể kết nối đến Máy Chủ tại thời điểm này, xin vui lòng thử lại sau hoặc khởi động lại ứng dụng này.!", "Lỗi", Color.RED, Color.RED);
+            appendMessage(" Cannot send message now, cannot connect to Server at this time, please try again later or restart this application!", "Error", Color.RED, Color.RED);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

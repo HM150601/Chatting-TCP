@@ -40,7 +40,7 @@ public class SocketThread implements Runnable {
 
     private void createConnection(String receiver, String sender, String filename) {
         try {
-            main.appendMessage("[createConnection]: đang tạo kết nối chia sẻ file.");
+            main.appendMessage("[createConnection]: Creating a file sharing connection");
             Socket s = main.getClientList(receiver);
             if (s != null) { // Client đã tồn tại
                 main.appendMessage("[createConnection]: Socket OK");
@@ -51,9 +51,9 @@ public class SocketThread implements Runnable {
                 dosS.writeUTF(format);
                 main.appendMessage("[createConnection]: " + format);
             } else {// Client không tồn tại, gửi lại cho sender rằng receiver không tìm thấy.
-                main.appendMessage("[createConnection]: Client không được tìm thấy '" + receiver + "'");
+                main.appendMessage("[createConnection]: Client not found '" + receiver + "'");
                 DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
-                dos.writeUTF("CMD_SENDFILEERROR " + "Client '" + receiver + "' không được tìm thấy trong danh sách, bảo đảm rằng user đang online.!");
+                dos.writeUTF("CMD_SENDFILEERROR " + "Client '" + receiver + "' not found in the list, make sure the user is online!");
             }
         } catch (IOException e) {
             main.appendMessage("[createConnection]: " + e.getLocalizedMessage());
@@ -82,7 +82,7 @@ public class SocketThread implements Runnable {
                         client = clientUsername;
                         main.setClientList(clientUsername);
                         main.setSocketList(socket);
-                        main.appendMessage("[Client]: " + clientUsername + " tham gia chatroom.!");
+                        main.appendMessage("[Client]: " + clientUsername + " join chatroom!");
                         break;
 
                     case "CMD_CHAT":
@@ -103,9 +103,9 @@ public class SocketThread implements Runnable {
                              */
                             String content = from + ": " + msg;
                             dos.writeUTF("CMD_MESSAGE " + content);
-                            main.appendMessage("[Message]: Từ " + from + " Đến " + sendTo + " : " + msg);
+                            main.appendMessage("[Message]: From " + from + " To " + sendTo + " : " + msg);
                         } catch (IOException e) {
-                            main.appendMessage("[IOException]: Không thể gửi tin nhắn đến " + sendTo);
+                            main.appendMessage("[IOException]: Unable to send message to " + sendTo);
                         }
                         break;
 
@@ -134,17 +134,17 @@ public class SocketThread implements Runnable {
                         break;
 
                     case "CMD_SHARINGSOCKET":
-                        main.appendMessage("CMD_SHARINGSOCKET : Client thiết lập một socket cho kết nối chia sẻ file...");
+                        main.appendMessage("CMD_SHARINGSOCKET : Client establishes a socket for file sharing connection...");
                         String file_sharing_username = st.nextToken();
                         filesharing_username = file_sharing_username;
                         main.setClientFileSharingUsername(file_sharing_username);
                         main.setClientFileSharingSocket(socket);
                         main.appendMessage("CMD_SHARINGSOCKET : Username: " + file_sharing_username);
-                        main.appendMessage("CMD_SHARINGSOCKET : Chia Sẻ File đang được mở");
+                        main.appendMessage("CMD_SHARINGSOCKET : Share file is open");
                         break;
 
                     case "CMD_SENDFILE":
-                        main.appendMessage("CMD_SENDFILE : Client đang gửi một file...");
+                        main.appendMessage("CMD_SENDFILE : Client is sending a file...");
                         /*
                          Format: CMD_SENDFILE [Filename] [Size] [Recipient] [Consignee]  from: Sender Format
                          Format: CMD_SENDFILE [Filename] [Size] [Consignee] to Receiver Format
@@ -153,23 +153,23 @@ public class SocketThread implements Runnable {
                         String filesize = st.nextToken();
                         String sendto = st.nextToken();
                         String consignee = st.nextToken();
-                        main.appendMessage("CMD_SENDFILE : Từ: " + consignee);
-                        main.appendMessage("CMD_SENDFILE : Đến: " + sendto);
+                        main.appendMessage("CMD_SENDFILE : From: " + consignee);
+                        main.appendMessage("CMD_SENDFILE : To: " + sendto);
                         /**
                          * Nhận client Socket *
                          */
-                        main.appendMessage("CMD_SENDFILE : sẵn sàng cho các kết nối..");
+                        main.appendMessage("CMD_SENDFILE : Ready for connections..");
                         Socket cSock = main.getClientFileSharingSocket(sendto); /* Consignee Socket  */
                         /*   Now Check if the consignee socket was exists.   */
 
                         if (cSock != null) { /* Exists   */
 
                             try {
-                                main.appendMessage("CMD_SENDFILE : Đã được kết nối..!");
+                                main.appendMessage("CMD_SENDFILE : Already connected..!");
                                 /**
                                  * Đầu tiên là viết filename..  *
                                  */
-                                main.appendMessage("CMD_SENDFILE : đang gửi file đến client...");
+                                main.appendMessage("CMD_SENDFILE : sending file to client...");
                                 DataOutputStream cDos = new DataOutputStream(cSock.getOutputStream());
                                 cDos.writeUTF("CMD_SENDFILE " + file_name + " " + filesize + " " + consignee);
                                 /**
@@ -189,7 +189,7 @@ public class SocketThread implements Runnable {
                                  */
                                 main.removeClientFileSharing(sendto);
                                 main.removeClientFileSharing(consignee);
-                                main.appendMessage("CMD_SENDFILE : File đã được gửi đến client...");
+                                main.appendMessage("CMD_SENDFILE : File has been sent to the client...");
                             } catch (IOException e) {
                                 main.appendMessage("[CMD_SENDFILE]: " + e.getMessage());
                             }
@@ -197,9 +197,9 @@ public class SocketThread implements Runnable {
                             /*   FORMAT: CMD_SENDFILEERROR  */
 
                             main.removeClientFileSharing(consignee);
-                            main.appendMessage("CMD_SENDFILE : Client '" + sendto + "' không tìm thấy.!");
+                            main.appendMessage("CMD_SENDFILE : Client '" + sendto + "' Not found!");
                             DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
-                            dos.writeUTF("CMD_SENDFILEERROR " + "Client '" + sendto + "' không tìm thấy, Chia Sẻ File sẽ thoát.");
+                            dos.writeUTF("CMD_SENDFILEERROR " + "Client '" + sendto + "' Not found, File sharing exited");
                         }
                         break;
 
@@ -269,7 +269,7 @@ public class SocketThread implements Runnable {
                         break;
 
                     default:
-                        main.appendMessage("[CMDException]: Không rõ lệnh " + CMD);
+                        main.appendMessage("[CMDException]: Command Unknown " + CMD);
                         break;
                 }
             }
@@ -281,7 +281,7 @@ public class SocketThread implements Runnable {
             if (filesharing_username != null) {
                 main.removeClientFileSharing(filesharing_username);
             }
-            main.appendMessage("[SocketThread]: Kết nối client bị đóng..!");
+            main.appendMessage("[SocketThread]: Client connection is closed!");
         }
     }
 
