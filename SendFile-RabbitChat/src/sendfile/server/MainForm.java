@@ -1,4 +1,3 @@
-
 package sendfile.server;
 
 import java.io.IOException;
@@ -35,8 +34,8 @@ public class MainForm extends javax.swing.JFrame {
     
     public void appendMessage(String msg){
         Date date = new Date();
-        jTextArea1.append(sdf.format(date) +": "+ msg +"\n");
-        jTextArea1.setCaretPosition(jTextArea1.getText().length() - 1);
+        txt_StatusServer.append(sdf.format(date) +": "+ msg +"\n");
+        txt_StatusServer.setCaretPosition(txt_StatusServer.getText().length() - 1);
     }
     
     public void setSocketList(Socket socket){
@@ -128,11 +127,11 @@ public class MainForm extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        txt_Port = new javax.swing.JTextField();
+        btn_StartServer = new javax.swing.JButton();
+        btn_StopServer = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txt_StatusServer = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -140,36 +139,36 @@ public class MainForm extends javax.swing.JFrame {
 
         jLabel1.setText("Port:");
 
-        jTextField1.setText("3333");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txt_Port.setText("3333");
+        txt_Port.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txt_PortActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Khởi động Máy Chủ");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_StartServer.setText("Start Server");
+        btn_StartServer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btn_StartServerActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Dừng Máy Chủ");
-        jButton2.setEnabled(false);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btn_StopServer.setText("Stop Server");
+        btn_StopServer.setEnabled(false);
+        btn_StopServer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btn_StopServerActionPerformed(evt);
             }
         });
 
-        jTextArea1.setEditable(false);
-        jTextArea1.setBackground(new java.awt.Color(255, 193, 193));
-        jTextArea1.setColumns(20);
-        jTextArea1.setForeground(new java.awt.Color(0, 0, 0));
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txt_StatusServer.setEditable(false);
+        txt_StatusServer.setBackground(new java.awt.Color(225, 255, 177));
+        txt_StatusServer.setColumns(20);
+        txt_StatusServer.setForeground(new java.awt.Color(210, 0, 26));
+        txt_StatusServer.setRows(5);
+        jScrollPane1.setViewportView(txt_StatusServer);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sendfile/server/rabiit.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/facebook_messenger_150px.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -182,13 +181,13 @@ public class MainForm extends javax.swing.JFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt_Port, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1))
+                        .addComponent(btn_StartServer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btn_StopServer, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -199,41 +198,42 @@ public class MainForm extends javax.swing.JFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(txt_Port, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_StartServer))
+                    .addComponent(btn_StopServer))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btn_StartServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_StartServerActionPerformed
         // TODO add your handling code here:
-        int port = Integer.parseInt(jTextField1.getText());
+        int port = Integer.parseInt(txt_Port.getText());
         serverThread = new ServerThread(port, this);
         t = new Thread(serverThread);
         t.start();
 
         new Thread(new OnlineListThread(this)).start();
 
-        jButton1.setEnabled(false);
-        jButton2.setEnabled(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+        btn_StartServer.setEnabled(false);
+        btn_StopServer.setEnabled(true);
+    }//GEN-LAST:event_btn_StartServerActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btn_StopServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_StopServerActionPerformed
         // TODO add your handling code here:
         int confirm = JOptionPane.showConfirmDialog(null, "Close Server?");
         if(confirm == 0){
             serverThread.stop();
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btn_StopServerActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txt_PortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_PortActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txt_PortActionPerformed
 
     /**
      * @param args the command line arguments
@@ -271,13 +271,13 @@ public class MainForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btn_StartServer;
+    private javax.swing.JButton btn_StopServer;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txt_Port;
+    private javax.swing.JTextArea txt_StatusServer;
     // End of variables declaration//GEN-END:variables
 
    
