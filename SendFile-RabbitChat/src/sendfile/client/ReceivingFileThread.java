@@ -14,16 +14,6 @@ import java.util.StringTokenizer;
 import javax.swing.JOptionPane;
 import javax.swing.ProgressMonitorInputStream;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author hanhhoatranthi
- */
 public class ReceivingFileThread implements Runnable {
     
     protected Socket socket;
