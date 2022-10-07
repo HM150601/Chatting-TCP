@@ -60,7 +60,7 @@ public class MainForm extends javax.swing.JFrame {
             
             // Khởi động Client Thread 
             new Thread(new ClientThread(socket, this)).start();
-            jButton1.setEnabled(true);
+            btn_Send.setEnabled(true);
             // đã được kết nối
             isConnected = true;
             
@@ -83,39 +83,39 @@ public class MainForm extends javax.swing.JFrame {
         Hiển thị Message
     */
     public void appendMessage(String msg, String header, Color headerColor, Color contentColor){
-        jTextPane1.setEditable(true);
+        txt_ChatBox.setEditable(true);
         getMsgHeader(header, headerColor);
         getMsgContent(msg, contentColor);
-        jTextPane1.setEditable(false);
+        txt_ChatBox.setEditable(false);
     }
     
     /*
         Tin nhắn chat
     */
     public void appendMyMessage(String msg, String header){
-        jTextPane1.setEditable(true);
+        txt_ChatBox.setEditable(true);
         getMsgHeader(header, Color.GREEN);
         getMsgContent(msg, Color.BLACK);
-        jTextPane1.setEditable(false);
+        txt_ChatBox.setEditable(false);
     }
     
     /*
         Tiêu đề tin nhắn
     */
     public void getMsgHeader(String header, Color color){
-        int len = jTextPane1.getDocument().getLength();
-        jTextPane1.setCaretPosition(len);
-        jTextPane1.setCharacterAttributes(MessageStyle.styleMessageContent(color, "Impact", 13), false);
-        jTextPane1.replaceSelection(header+":");
+        int len = txt_ChatBox.getDocument().getLength();
+        txt_ChatBox.setCaretPosition(len);
+        txt_ChatBox.setCharacterAttributes(MessageStyle.styleMessageContent(color, "Impact", 13), false);
+        txt_ChatBox.replaceSelection(header+":");
     }
     /*
         Nội dung tin nhắn
     */
     public void getMsgContent(String msg, Color color){
-        int len = jTextPane1.getDocument().getLength();
-        jTextPane1.setCaretPosition(len);
-        jTextPane1.setCharacterAttributes(MessageStyle.styleMessageContent(color, "Arial", 12), false);
-        jTextPane1.replaceSelection(msg +"\n\n");
+        int len = txt_ChatBox.getDocument().getLength();
+        txt_ChatBox.setCaretPosition(len);
+        txt_ChatBox.setCharacterAttributes(MessageStyle.styleMessageContent(color, "Arial", 12), false);
+        txt_ChatBox.replaceSelection(msg +"\n\n");
     }
     
     public void appendOnlineList(Vector list){
@@ -127,8 +127,8 @@ public class MainForm extends javax.swing.JFrame {
     */
     public void showOnLineList(Vector list){
         try {
-            txtpane2.setEditable(true);
-            txtpane2.setContentType("text/html");
+            txt_Online.setEditable(true);
+            txt_Online.setContentType("text/html");
             StringBuilder sb = new StringBuilder();
             Iterator it = list.iterator();
             sb.append("<html><table>");
@@ -140,9 +140,9 @@ public class MainForm extends javax.swing.JFrame {
                 System.out.println("Online: "+ e);
             }
             sb.append("</table></body></html>");
-            txtpane2.removeAll();
-            txtpane2.setText(sb.toString());
-            txtpane2.setEditable(false);
+            txt_Online.removeAll();
+            txt_Online.setText(sb.toString());
+            txt_Online.setEditable(false);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -152,9 +152,9 @@ public class MainForm extends javax.swing.JFrame {
       ************************************  Hiển thị danh sách online  *********************************************
     */
     private void sampleOnlineList(Vector list){
-        txtpane2.setEditable(true);
-        txtpane2.removeAll();
-        txtpane2.setText("");
+        txt_Online.setEditable(true);
+        txt_Online.removeAll();
+        txt_Online.setText("");
         Iterator i = list.iterator();
         while(i.hasNext()){
             Object e = i.next();
@@ -167,18 +167,18 @@ public class MainForm extends javax.swing.JFrame {
             JLabel label = new JLabel(icon);
             label.setText(" "+ e);
             panel.add(label);
-            int len = txtpane2.getDocument().getLength();
-            txtpane2.setCaretPosition(len);
-            txtpane2.insertComponent(panel);
+            int len = txt_Online.getDocument().getLength();
+            txt_Online.setCaretPosition(len);
+            txt_Online.insertComponent(panel);
             /*  Append Next Line   */
             sampleAppend();
         }
-        txtpane2.setEditable(false);
+        txt_Online.setEditable(false);
     }
     private void sampleAppend(){
-        int len = txtpane2.getDocument().getLength();
-        txtpane2.setCaretPosition(len);
-        txtpane2.replaceSelection("\n");
+        int len = txt_Online.getDocument().getLength();
+        txt_Online.setCaretPosition(len);
+        txt_Online.replaceSelection("\n");
     }
     /*
       ************************************  Show Online Sample  *********************************************
@@ -262,61 +262,65 @@ public class MainForm extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        txt_ChatBox = new javax.swing.JTextPane();
+        txt_InputChat = new javax.swing.JTextField();
+        btn_Send = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        txtpane2 = new javax.swing.JTextPane();
+        txt_Online = new javax.swing.JTextPane();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         LogoutMenu = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
+        menu_ShareFiles = new javax.swing.JMenu();
         sendFileMenu = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 255, 255));
 
-        jTextPane1.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 11)); // NOI18N
-        jScrollPane1.setViewportView(jTextPane1);
+        txt_ChatBox.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 11)); // NOI18N
+        jScrollPane1.setViewportView(txt_ChatBox);
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txt_InputChat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txt_InputChatActionPerformed(evt);
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(255, 153, 153));
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setText("Gửi");
-        jButton1.setEnabled(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_Send.setBackground(new java.awt.Color(167, 255, 228));
+        btn_Send.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btn_Send.setForeground(new java.awt.Color(255, 116, 177));
+        btn_Send.setText("SEND");
+        btn_Send.setEnabled(false);
+        btn_Send.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btn_SendActionPerformed(evt);
             }
         });
 
-        txtpane2.setFont(new java.awt.Font("Tahoma", 1, 9)); // NOI18N
-        txtpane2.setForeground(new java.awt.Color(120, 14, 3));
-        txtpane2.setAutoscrolls(false);
-        txtpane2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jScrollPane3.setViewportView(txtpane2);
+        txt_Online.setFont(new java.awt.Font("Tahoma", 1, 9)); // NOI18N
+        txt_Online.setForeground(new java.awt.Color(120, 14, 3));
+        txt_Online.setAutoscrolls(false);
+        txt_Online.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jScrollPane3.setViewportView(txt_Online);
 
         jLabel1.setBackground(new java.awt.Color(255, 153, 153));
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("       Danh sách online");
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel1.setText("Online:");
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/rabbit2.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/facebook_messenger_80px.png"))); // NOI18N
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(147, 125, 194));
+        jLabel4.setText("TEAM 5 CHATTING APPLICATION");
 
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/check.png"))); // NOI18N
-        jMenu2.setText("Tài Khoản");
+        jMenu2.setText("Account");
 
         LogoutMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/loggoff.png"))); // NOI18N
-        LogoutMenu.setText("Đăng Xuất");
+        LogoutMenu.setText("Log Out");
         LogoutMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 LogoutMenuActionPerformed(evt);
@@ -326,33 +330,24 @@ public class MainForm extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
-        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sharing.png"))); // NOI18N
-        jMenu3.setText("Chia Sẻ File");
-        jMenu3.addActionListener(new java.awt.event.ActionListener() {
+        menu_ShareFiles.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sharing.png"))); // NOI18N
+        menu_ShareFiles.setText("Share Files");
+        menu_ShareFiles.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu3ActionPerformed(evt);
+                menu_ShareFilesActionPerformed(evt);
             }
         });
 
         sendFileMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sendfile.png"))); // NOI18N
-        sendFileMenu.setText("Gửi File");
+        sendFileMenu.setText("Send File");
         sendFileMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sendFileMenuActionPerformed(evt);
             }
         });
-        jMenu3.add(sendFileMenu);
+        menu_ShareFiles.add(sendFileMenu);
 
-        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/process.png"))); // NOI18N
-        jMenuItem3.setText("Tải Xuống");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuItem3);
-
-        jMenuBar1.add(jMenu3);
+        jMenuBar1.add(menu_ShareFiles);
 
         setJMenuBar(jMenuBar1);
 
@@ -360,49 +355,53 @@ public class MainForm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(178, 178, 178)
-                        .addComponent(jLabel3))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane3)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(txt_InputChat, javax.swing.GroupLayout.PREFERRED_SIZE, 513, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_Send, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                        .addComponent(jLabel2))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(30, 30, 30)
+                .addComponent(jLabel3))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel3))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE))
-                            .addComponent(jScrollPane1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(25, 25, 25)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_InputChat, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_Send, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(22, 22, 22)))
                 .addGap(6, 6, 6))
         );
 
@@ -423,22 +422,9 @@ public class MainForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_sendFileMenuActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void menu_ShareFilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_ShareFilesActionPerformed
         // TODO add your handling code here:
-        try {
-            JFileChooser chooser = new JFileChooser();
-            chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-            int browse = chooser.showOpenDialog(this);
-            if(browse == chooser.APPROVE_OPTION){
-                this.mydownloadfolder = chooser.getSelectedFile().toString() +"\\";
-            }
-        } catch (HeadlessException e) {
-        }
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
-
-    private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenu3ActionPerformed
+    }//GEN-LAST:event_menu_ShareFilesActionPerformed
 
     private void LogoutMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutMenuActionPerformed
         // TODO add your handling code here:
@@ -455,29 +441,29 @@ public class MainForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_LogoutMenuActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txt_InputChatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_InputChatActionPerformed
         // TODO add your handling code here:
         try {
             String content = username+" "+ evt.getActionCommand();
             dos.writeUTF("CMD_CHATALL "+ content);
             appendMyMessage(" "+evt.getActionCommand(), username);
-            jTextField1.setText("");
+            txt_InputChat.setText("");
         } catch (IOException e) {
             appendMessage(" Cannot send message now, cannot connect to Server at this time, please try again later or restart this application.!", "Error", Color.RED, Color.RED);
         }
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txt_InputChatActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btn_SendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SendActionPerformed
         // TODO add your handling code here:
         try {
-            String content = username+" "+ jTextField1.getText();
+            String content = username+" "+ txt_InputChat.getText();
             dos.writeUTF("CMD_CHATALL "+ content);
-            appendMyMessage(" "+jTextField1.getText(), username);
-            jTextField1.setText("");
+            appendMyMessage(" "+txt_InputChat.getText(), username);
+            txt_InputChat.setText("");
         } catch (IOException e) {
             appendMessage(" Cannot send message now, cannot connect to Server at this time, please try again later or restart this application!", "Error", Color.RED, Color.RED);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btn_SendActionPerformed
 
     /**
      * @param args the command line arguments
@@ -516,19 +502,19 @@ public class MainForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem LogoutMenu;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btn_Send;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JMenu menu_ShareFiles;
     private javax.swing.JMenuItem sendFileMenu;
-    private javax.swing.JTextPane txtpane2;
+    private javax.swing.JTextPane txt_ChatBox;
+    private javax.swing.JTextField txt_InputChat;
+    private javax.swing.JTextPane txt_Online;
     // End of variables declaration//GEN-END:variables
 }

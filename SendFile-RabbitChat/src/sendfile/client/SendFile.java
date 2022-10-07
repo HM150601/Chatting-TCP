@@ -145,7 +145,7 @@ public class SendFile extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         txtFile = new javax.swing.JTextField();
-        btnBrowse = new javax.swing.JButton();
+        btnBrowseFile = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txtSendTo = new javax.swing.JTextField();
         progressbar = new javax.swing.JProgressBar();
@@ -154,7 +154,8 @@ public class SendFile extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Dịch vụ Gửi File - RabbitChat");
 
-        jLabel1.setText("Chọn File :");
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setText("Select File :");
 
         txtFile.setEditable(false);
         txtFile.setBackground(new java.awt.Color(255, 255, 255));
@@ -165,23 +166,29 @@ public class SendFile extends javax.swing.JFrame {
             }
         });
 
-        btnBrowse.setBackground(new java.awt.Color(255, 153, 153));
-        btnBrowse.setForeground(new java.awt.Color(0, 0, 0));
-        btnBrowse.setText("Tìm File");
-        btnBrowse.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnBrowse.addActionListener(new java.awt.event.ActionListener() {
+        btnBrowseFile.setBackground(new java.awt.Color(245, 239, 230));
+        btnBrowseFile.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnBrowseFile.setForeground(new java.awt.Color(33, 146, 255));
+        btnBrowseFile.setText("Browse");
+        btnBrowseFile.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBrowseFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBrowseActionPerformed(evt);
+                btnBrowseFileActionPerformed(evt);
             }
         });
 
-        jLabel2.setText("Gửi đến :");
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setText("Send To:");
 
+        progressbar.setBackground(new java.awt.Color(156, 255, 46));
+        progressbar.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        progressbar.setForeground(new java.awt.Color(255, 235, 173));
         progressbar.setStringPainted(true);
 
-        btnSendFile.setBackground(new java.awt.Color(255, 153, 153));
-        btnSendFile.setForeground(new java.awt.Color(0, 0, 0));
-        btnSendFile.setText("Gửi File");
+        btnSendFile.setBackground(new java.awt.Color(245, 239, 230));
+        btnSendFile.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnSendFile.setForeground(new java.awt.Color(33, 146, 255));
+        btnSendFile.setText("Send File");
         btnSendFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSendFileActionPerformed(evt);
@@ -199,19 +206,18 @@ public class SendFile extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtSendTo, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtFile, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btnSendFile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnBrowseFile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addComponent(jLabel1)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(progressbar, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(btnSendFile))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(txtFile, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(btnBrowse))
-                                .addComponent(txtSendTo, javax.swing.GroupLayout.Alignment.LEADING)))
-                        .addContainerGap(22, Short.MAX_VALUE))))
+                            .addComponent(progressbar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(15, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,17 +226,17 @@ public class SendFile extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBrowse)
+                    .addComponent(btnBrowseFile)
                     .addComponent(txtFile, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtSendTo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnSendFile, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(progressbar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtSendTo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSendFile, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(progressbar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
@@ -240,10 +246,10 @@ public class SendFile extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFileActionPerformed
 
-    private void btnBrowseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBrowseActionPerformed
+    private void btnBrowseFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBrowseFileActionPerformed
         // TODO add your handling code here:
         showOpenDialog();
-    }//GEN-LAST:event_btnBrowseActionPerformed
+    }//GEN-LAST:event_btnBrowseFileActionPerformed
 
     private void btnSendFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendFileActionPerformed
         // TODO add your handling code here:
@@ -282,14 +288,14 @@ public class SendFile extends javax.swing.JFrame {
     public void disableGUI(boolean d){
         if(d){ // Disable
             txtSendTo.setEditable(false);
-            btnBrowse.setEnabled(false);
+            btnBrowseFile.setEnabled(false);
             btnSendFile.setEnabled(false);
             txtFile.setEditable(false);
             progressbar.setVisible(true);
         } else { // Enable
             txtSendTo.setEditable(true);
             btnSendFile.setEnabled(true);
-            btnBrowse.setEnabled(true);
+            btnBrowseFile.setEnabled(true);
             txtFile.setEditable(true);
             progressbar.setVisible(false);
         }
@@ -368,7 +374,7 @@ public class SendFile extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBrowse;
+    private javax.swing.JButton btnBrowseFile;
     private javax.swing.JButton btnSendFile;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
