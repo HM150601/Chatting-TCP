@@ -135,7 +135,7 @@ public class MainForm extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Máy chủ RabbitChat");
+        setTitle("Chatting Application");
 
         jLabel1.setText("Port:");
 

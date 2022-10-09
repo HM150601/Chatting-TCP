@@ -152,7 +152,7 @@ public class SendFile extends javax.swing.JFrame {
         btnSendFile = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Dịch vụ Gửi File - RabbitChat");
+        setTitle("Send Files");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Select File :");
